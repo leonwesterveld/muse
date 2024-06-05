@@ -86,19 +86,21 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
-    width: 100vw;
-    z-index: -1;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
     background-image: url('../img/paper.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     flex-direction: column;
+    gap: 1rem;
 }
+
 
 .header{
     display: flex;
-    width: 100%;
     height: 5rem;
+    padding: 1.4rem 1.4rem .5rem;
 }
 
 .header__button{
@@ -118,16 +120,74 @@ canvas {
 }
 
 .header__tekst{
-width: 100%;
-display: flex;
-justify-content: center;
-margin-right: 6rem;
-font-family: Edwardian Script ITC;
-font-size: 3rem;
-font-weight: 200;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-right: 6rem;
+    font-family: Edwardian Script ITC;
+    font-size: 4rem;
+    font-weight: 200;
 }
 
 h1{
     margin: 0;
     height: 5rem;
+}
+
+
+
+.animation{
+    padding: 1.4rem 2rem;
+    display: grid;
+    grid-template-columns: 64% 34%;
+    gap: 2%;
+}
+
+.animation__video{
+    position: relative;
+}
+
+#video{
+    height: 100%;
+    width: 100%;
+}
+
+#playButton{
+    position: absolute;
+    bottom: 2%;
+    left: 1%;
+}
+
+#playButton {
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-left: 2rem solid white;
+    border-top: 1rem solid transparent;
+    border-bottom: 1rem solid transparent;
+}
+
+.pause-icon:before,
+.pause-icon:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 0.6rem;
+    height: 2rem;
+    background: white;
+}
+.pause-icon:before {
+    left: 0.25rem;
+}
+.pause-icon:after {
+    right: 0.25rem;
+}
+
+.render{
+    padding: 1.4rem 2rem;
+    display: grid;
+    grid-template-columns: 34% 64%;
+    gap: 2%;
 }
