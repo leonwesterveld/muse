@@ -191,3 +191,9 @@ h1{
     grid-template-columns: 34% 64%;
     gap: 2%;
 }
+
+#cube-container {
+    width: 100%;
+    height: 400px;
+    margin: 20px 0;
+}
