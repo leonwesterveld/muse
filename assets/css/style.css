@@ -95,7 +95,6 @@ canvas {
 .header{
     display: flex;
     height: 5rem;
-    padding: 1.4rem 1.4rem .5rem;
 }
 
 .header__button{
@@ -107,6 +106,12 @@ canvas {
     background: transparent;
     padding: 1.2rem;
     rotate: 5deg;
+    cursor: pointer;
+}
+
+.header__button:hover{
+    color: red;
+    transition: 1.5s;
 }
 
 .header__button__img{
@@ -132,10 +137,10 @@ h1{
 
 
 .animation{
-    padding: 1.4rem 2rem;
     display: grid;
     grid-template-columns: 64% 34%;
     gap: 2%;
+    padding: 1.4rem 2rem 0;
 }
 
 .animation__video{
@@ -181,7 +186,7 @@ h1{
 }
 
 .render{
-    padding: 1.4rem 2rem;
+    padding: 0rem 2rem 1.4rem;
     display: grid;
     grid-template-columns: 34% 64%;
     gap: 2%;
