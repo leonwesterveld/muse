@@ -168,9 +168,9 @@ const onClick = (event) => {
       // Animate the camera to zoom in on the mesh
       gsap.to(camera.position, {
         duration: 1,
-        x: target.x,
+        x: target.x - 7,
         y: target.y,
-        z: target.z + 2, // Adjusted the zoom level to be less pronounced
+        z: target.z + 0.2, // Adjusted the zoom level to be less pronounced
         onUpdate: () => {
           camera.lookAt(mesh.position);
         },
@@ -181,7 +181,7 @@ const onClick = (event) => {
         duration: 1,
         x: target.x,
         y: target.y,
-        z: target.z + 2.5, // Adjusted the zoom level to be less pronounced
+        z: target.z + 0.005, // Adjusted the zoom level to be less pronounced
         onUpdate: () => {
           camera.lookAt(toyBlock.position);
         },
