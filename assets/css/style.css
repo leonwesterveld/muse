@@ -72,8 +72,8 @@ nav > ul > li:hover {
 canvas {
     display: block;
     width: 591px;
-    height: 600px; /* Limiting the height to 600px */
-    background: #000; /* Optional, to give a background color to the canvas */
+    height: 600px;
+    background: #000;
 }
 
 #info__page{
@@ -84,7 +84,7 @@ canvas {
     height: 100%;
     width: 100%;
     z-index: 3;
-    background-image: url('../img/paper.jpg');
+    background-image: url('../img/paper.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -186,6 +186,7 @@ h1{
 }
 
 .render{
+    height: 100%;
     padding: 0rem 2rem 1.4rem;
     display: grid;
     grid-template-columns: 34% 64%;
@@ -196,4 +197,12 @@ h1{
     width: 100%;
     height: 400px;
     margin: 20px 0;
+}
+
+.render__3d{
+}
+
+.canvas3d{
+    width: 100%;
+    height: 100%;
 }
