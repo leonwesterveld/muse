@@ -7,25 +7,39 @@ let scene, camera, renderer, controls, mixer;
 function init() {
     const canvas = document.getElementById('3d-canvas');
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0); // Ensure background is transparent
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 10, 7.5).normalize();
+    light.position.set(5, 5, 5).normalize();
     scene.add(light);
+    const light2 = new THREE.DirectionalLight(0xffffff, 1);
+    light2.position.set(-5, -5, -5).normalize();
+    scene.add(light2);
 
     const loader = new FBXLoader();
     loader.load('assets/ToyBlock.fbx', (object) => {
         mixer = new THREE.AnimationMixer(object);
         scene.add(object);
-        object.position.set(1, 1, 1);
-        object.scale.set(1, 1, 1);
+        object.position.set(0, 0, 0);
+        object.scale.set(0.1, 0.1, 0.1);
+
+        // Ensure materials in the FBX support transparency if needed
+        object.traverse((child) => {
+            if (child.isMesh) {
+                child.material.transparent = true;
+                child.material.opacity = 1.0; // Adjust as necessary for your needs
+                // Debugging logs to check materials
+                console.log(`Material properties for ${child.name}:`, child.material);
+            }
+        });
     }, undefined, (error) => {
         console.error('Error loading FBX file:', error);
     });
 
     camera.position.z = 5;
+    camera.position.x = 50;
     controls = new OrbitControls(camera, renderer.domElement);
 
     window.addEventListener('resize', onWindowResize, false);
