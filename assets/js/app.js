@@ -8,6 +8,7 @@ function init() {
     const canvas = document.getElementById('3d-canvas');
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0); // Ensure background is transparent
 
@@ -19,18 +20,16 @@ function init() {
     scene.add(light2);
 
     const loader = new FBXLoader();
-    loader.load('assets/ToyBlock.fbx', (object) => {
+    loader.load('assets/pier.fbx', (object) => {
         mixer = new THREE.AnimationMixer(object);
         scene.add(object);
         object.position.set(0, 0, 0);
         object.scale.set(0.1, 0.1, 0.1);
 
-        // Ensure materials in the FBX support transparency if needed
         object.traverse((child) => {
             if (child.isMesh) {
                 child.material.transparent = true;
-                child.material.opacity = 1.0; // Adjust as necessary for your needs
-                // Debugging logs to check materials
+                child.material.opacity = 1.0;
                 console.log(`Material properties for ${child.name}:`, child.material);
             }
         });
@@ -38,27 +37,24 @@ function init() {
         console.error('Error loading FBX file:', error);
     });
 
-    camera.position.z = 5;
-    camera.position.x = 50;
+    camera.position.z = 100;
+    camera.position.x = 10;
     controls = new OrbitControls(camera, renderer.domElement);
 
     window.addEventListener('resize', onWindowResize, false);
+
+    // Ensure the canvas dimensions are set correctly
+    onWindowResize();
+
+    // Start animation loop
+    animate();
 }
 
 function onWindowResize() {
     const canvas = document.getElementById('3d-canvas');
-    const light = {
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        radius: 100,
-        gradientRadius: 150,
-        color: 'rgba(255, 355, 255, 0.8)'
-    };
-
     camera.aspect = canvas.clientWidth / canvas.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-
 }
 
 function animate() {
@@ -70,18 +66,15 @@ function animate() {
 
 const clock = new THREE.Clock();
 init();
-animate();
 
-let info = document.getElementById("info");
-let page = document.getElementById("info__page");
-let infoGone = document.getElementById("info__gone");
-
-info.onclick = function () {
-    page.style.display = "flex";
-}
-infoGone.onclick = function () {
-    page.style.display = "none";
-}
+document.getElementById("info").onclick = function () {
+    document.getElementById("info__page").style.display = "flex";
+    document.getElementById("city__page").style.display = "none";
+};
+document.getElementById("info__gone").onclick = function () {
+    document.getElementById("info__page").style.display = "none";
+    document.getElementById("city__page").style.display = "flex";
+};
 
 document.getElementById('playButton').addEventListener('click', function() {
     var video = document.getElementById('video');
@@ -100,8 +93,3 @@ document.getElementById('playButton').addEventListener('click', function() {
         button.style.borderBottom = '1rem solid transparent';
     }
 });
-
-
-
-
-console.log("jo");
