@@ -47,9 +47,18 @@ function init() {
 
 function onWindowResize() {
     const canvas = document.getElementById('3d-canvas');
+    const light = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        radius: 100,
+        gradientRadius: 150,
+        color: 'rgba(255, 355, 255, 0.8)'
+    };
+
     camera.aspect = canvas.clientWidth / canvas.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
 }
 
 function animate() {
@@ -91,6 +100,8 @@ document.getElementById('playButton').addEventListener('click', function() {
         button.style.borderBottom = '1rem solid transparent';
     }
 });
+
+
 
 
 console.log("jo");
