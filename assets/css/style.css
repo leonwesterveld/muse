@@ -200,7 +200,7 @@ h1{
 }
 
 
-.render__tekst, .animation__tekst{
+.render__tekst, .animation__tekst, .canvas__tekst{
     font-family: Pristina;
     font-size: 1.5rem;
 }
@@ -209,4 +209,14 @@ h1{
     width: 100% !important;
     height: 100% !important;
     background-color: transparent !important;
+}
+.render__3d{
+    position: relative;
+}
+
+.canvas__tekst{
+    position: absolute;
+    top: -4rem;
+    width: 100%;
+    text-align: center;
 }
