@@ -12,10 +12,10 @@ function init() {
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0); // Ensure background is transparent
 
-    const light = new THREE.DirectionalLight(0xffffff, 1);
+    const light = new THREE.DirectionalLight(0xF8AD73, 1);
     light.position.set(5, 5, 5).normalize();
     scene.add(light);
-    const light2 = new THREE.DirectionalLight(0xffffff, 1);
+    const light2 = new THREE.DirectionalLight(0xF8AD73, 1);
     light2.position.set(-5, -5, -5).normalize();
     scene.add(light2);
 

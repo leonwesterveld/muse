@@ -34,11 +34,8 @@ fbxLoader1.load(
   }
 );
 
-const geometry = new THREE.SphereGeometry(3, 64, 64);
-const material = new THREE.MeshStandardMaterial({
-  color: '#00ff83',
-});
-const mesh = new THREE.Mesh(geometry, material);
+
+const mesh = new THREE.Mesh();
 scene.add(mesh);
 
 const sizes = {
@@ -46,14 +43,23 @@ const sizes = {
   height: window.innerHeight,
 };
 
-const light = new THREE.PointLight(0xffffff, 95, 100);
-light.position.set(6, 6, 10);
-light.intensity = 40;
+const pointLight = new THREE.PointLight(0xffffff, 95, 100);
+pointLight.position.set(6, 6, 10);
+pointLight.intensity = 40;
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-scene.add(light, ambientLight);
+scene.add(pointLight, ambientLight);
 
-const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
+// Adding new directional lights
+const directionalLight1 = new THREE.DirectionalLight(0xF8AD73, 1);
+directionalLight1.position.set(5, 5, 5).normalize();
+scene.add(directionalLight1);
+
+const directionalLight2 = new THREE.DirectionalLight(0xF8AD73, 1);
+directionalLight2.position.set(-5, -5, -5).normalize();
+scene.add(directionalLight2);
+
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100000); // Increased far clipping plane
 camera.position.z = 15;
 scene.add(camera);
 
