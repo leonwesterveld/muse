@@ -11,6 +11,12 @@ node_modules
 dist
 dist-ssr
 *.local
+city.fbx
+pier.fbx
+assets/boot2.fbx
+assets/House1.fbx
+assets/Pier.fbx
+assets/boot2.fbx
 
 # Editor directories and files
 .vscode/*

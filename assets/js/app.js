@@ -15,10 +15,10 @@ function init() {
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setClearColor(0x000000, 0); // Ensure background is transparent
 
-    const light = new THREE.DirectionalLight(0xF8AD73, 1);
+    const light = new THREE.DirectionalLight(0xE8AD73, 1);
     light.position.set(5, 5, 5).normalize();
     scene.add(light);
-    const light2 = new THREE.DirectionalLight(0xF8AD73, 1);
+    const light2 = new THREE.DirectionalLight(0xE8AD73, 1);
     light2.position.set(-5, -5, -5).normalize();
     scene.add(light2);
 
@@ -42,7 +42,7 @@ function init() {
 
 function loadModels() {
     const loader = new FBXLoader();
-    const modelPaths = ['assets/Pier.fbx', 'assets/House1.fbx', 'assets/RowBoat.fbx'];
+    const modelPaths = ['assets/Boot2.fbx', 'assets/Pier.fbx', 'assets/House1.fbx', 'assets/RowBoat.fbx'];
 
     modelPaths.forEach((path) => {
         loader.load(path, (object) => {
@@ -105,21 +105,3 @@ document.getElementById("info__gone").onclick = function () {
     document.getElementById("info__page").style.display = "none";
     document.getElementById("city__page").style.display = "flex";
 };
-
-document.getElementById('playButton').addEventListener('click', function() {
-    var video = document.getElementById('video');
-    var button = document.getElementById('playButton');
-    if (video.paused) {
-        video.play();
-        button.classList.add('pause-icon');
-        button.style.borderLeft = 'none';
-        button.style.borderTop = 'none';
-        button.style.borderBottom = 'none';
-    } else {
-        video.pause();
-        button.classList.remove('pause-icon');
-        button.style.borderLeft = '2rem solid white';
-        button.style.borderTop = '1rem solid transparent';
-        button.style.borderBottom = '1rem solid transparent';
-    }
-});

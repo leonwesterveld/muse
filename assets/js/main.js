@@ -7,36 +7,32 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x6FDCE3);
 
 const fbxLoader1 = new FBXLoader();
-let boot;
+// let city;
 
-fbxLoader1.load(
-  'boot2.fbx',
-  (object) => {
-    object.traverse((child) => {
-      if (child.isMesh) {
-        if (child.material) {
-          child.material.transparent = false;
-        }
-      }
-    });
-    object.scale.set(0.005, 0.005, 0.005);
-    object.rotateY(48.7);
-    object.position.set(11, -15, 35);
-    scene.add(object);
-    boot = object;
-    boot.originalPosition = object.position.clone();
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-  },
-  (error) => {
-    console.log(error);
-  }
-);
-
-
-const mesh = new THREE.Mesh();
-scene.add(mesh);
+// fbxLoader1.load(
+//   'city.fbx',
+//   (object) => {
+//     object.traverse((child) => {
+//       if (child.isMesh) {
+//         if (child.material) {
+//           child.material.transparent = false;
+//         }
+//       }
+//     });
+//     object.scale.set(0.005, 0.005, 0.005);
+//     object.rotateY(48.7);
+//     object.position.set(11, -15, 35);
+//     scene.add(object);
+//     city = object;
+//     city.originalPosition = object.position.clone();
+//   },
+//   (xhr) => {
+//     console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
 
 const sizes = {
   width: window.innerWidth,
@@ -94,7 +90,6 @@ const loop = () => {
 loop();
 
 const tl = gsap.timeline({ defaults: { duration: 1 } });
-tl.fromTo(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
 tl.fromTo('nav', { y: '-100%' }, { y: '0%' });
 tl.fromTo('.title', { opacity: 0 }, { opacity: 1 });
 
@@ -111,55 +106,19 @@ window.addEventListener('mousemove', (e) => {
       Math.round((e.pageY / sizes.width) * 255),
       150,
     ];
-    let newColor = new THREE.Color(`rgb(${rgb.join(',')})`);
-    gsap.to(mesh.material.color, {
-      r: newColor.r,
-      g: newColor.g,
-      b: newColor.b,
-    });
   }
 });
 
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
 
-const fbxLoader = new FBXLoader();
-let Pier;
-
-fbxLoader.load(
-  'Pier.fbx',
-  (object) => {
-    object.traverse((child) => {
-      if (child.isMesh) {
-        if (child.material) {
-          child.material.transparent = false;
-        }
-      }
-    });
-    object.scale.set(0.02, 0.02, 0.02);
-    object.rotateY(48.7);
-    object.position.set(5, 0, 0);
-    scene.add(object);
-    Pier = object;
-    Pier.originalPosition = object.position.clone();
-  },
-  (xhr) => {
-    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-  },
-  (error) => {
-    console.log(error);
-  }
-);
-
-const zoomOutPier = () => {
-  if (Pier) {
+const zoomOutCity = () => {
+  if (city) {
     gsap.to(camera.position, {
       duration: 1,
       x: originalCameraPosition.x,
       y: originalCameraPosition.y,
       z: originalCameraPosition.z,
       onUpdate: () => {
-        camera.lookAt(Pier.position);
+        camera.lookAt(city.position);
       },
     });
   }
@@ -167,41 +126,5 @@ const zoomOutPier = () => {
 
 window.addEventListener('contextmenu', (event) => {
   event.preventDefault();
-  zoomOutPier();
+  zoomOutCity();
 });
-
-const onClick = (event) => {
-  mouse.x = (event.clientX / sizes.width) * 2 - 1;
-  raycaster.setFromCamera(mouse, camera);
-
-  const intersects = raycaster.intersectObjects([mesh, Pier], true);
-
-  if (intersects.length > 0) {
-    const intersectedObject = intersects[0].object;
-    const target = intersects[0].point;
-
-    if (intersectedObject === mesh) {
-      gsap.to(camera.position, {
-        duration: 1,
-        x: target.x - 7,
-        y: target.y,
-        z: target.z + 0.2,
-        onUpdate: () => {
-          camera.lookAt(mesh.position);
-        },
-      });
-    } else if (intersectedObject === Pier) {
-      gsap.to(camera.position, {
-        duration: 1,
-        x: target.x,
-        y: target.y,
-        z: target.z + 0.005,
-        onUpdate: () => {
-          camera.lookAt(Pier.position);
-        },
-      });
-    }
-  }
-};
-
-window.addEventListener('click', onClick);

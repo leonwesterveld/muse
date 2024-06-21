@@ -136,54 +136,35 @@ h1{
 
 
 
-.animation{
+.image{
     display: grid;
     grid-template-columns: 64% 34%;
     gap: 2%;
     padding: 1.4rem 2rem 0;
 }
 
-.animation__video{
+.image__img{
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 
-#video{
-    height: 100%;
+.img{
     width: 100%;
+    height: 100%;
 }
 
-#playButton{
-    position: absolute;
-    bottom: 2%;
-    left: 1%;
-}
-
-#playButton {
-    width: 2rem;
-    height: 2rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    border-left: 2rem solid white;
-    border-top: 1rem solid transparent;
-    border-bottom: 1rem solid transparent;
-}
-
-.pause-icon:before,
-.pause-icon:after {
-    content: '';
+.cover{
     position: absolute;
     top: 0;
-    width: 0.6rem;
-    height: 2rem;
-    background: white;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #BCAF99;
+    opacity: .4;
+    box-shadow: 0 0 2rem 2rem #f5deb6;
 }
-.pause-icon:before {
-    left: 0.25rem;
-}
-.pause-icon:after {
-    right: 0.25rem;
-}
+
 
 .render{
     height: 100%;
@@ -200,7 +181,7 @@ h1{
 }
 
 
-.render__tekst, .animation__tekst, .canvas__tekst{
+.render__tekst, .image__tekst, .canvas__tekst{
     font-family: Pristina;
     font-size: 1.5rem;
 }
